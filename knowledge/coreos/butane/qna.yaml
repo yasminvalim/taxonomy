@@ -1,0 +1,52 @@
+version: 2
+task_description: Teach the model about CoreOS's Butane project
+created_by: spresti
+domain: coreos
+seed_examples:
+  - question: What is CoreOS's Butane project?
+    answer: |
+      Butane (formerly the Fedora CoreOS Config Transpiler) is a tool that consumes a Butane Config
+      and produces an Ignition Config, which is a JSON document that can be given to a Fedora CoreOS
+      machine when it first boots. Using this config, a machine can be told to create users, create
+      filesystems, set up the network, install systemd units, and more. Butane configs are YAML files
+      conforming to Butane's schema.
+  - question: How can I use Butane to create an Ignition Config?
+    answer: |
+      Butane can be run from a container image with podman or docker, installed from Fedora package
+      repositories, or downloaded as a standalone binary. Using the official container images is the
+      recommended option.
+  - question: How can I use Butane using the official container images?
+    answer: |
+      # Pull the latest release
+      podman pull quay.io/coreos/butane:release
+
+      # Run Butane using standard in and standard out
+      podman run -i --rm quay.io/coreos/butane:release --pretty --strict < your_config.bu > transpiled_config.ign
+
+      # Run Butane using files
+      podman run --rm -v /path/to/your_config.bu:/config.bu:z quay.io/coreos/butane:release --pretty \
+       --strict /config.bu > transpiled_config.ign
+  - question: Can I use Butane using an alias?
+    answer: |
+      Yes, you can create an alias that looks like this:
+      alias butane='podman run --rm --interactive         \
+              --security-opt label=disable          \
+              --volume "${PWD}":/pwd --workdir /pwd \
+              quay.io/coreos/butane:release'
+  - question: Give an example of a Butane config file.
+    answer: |
+      variant: fcos
+      version: 1.1.0
+      passwd:
+        users:
+        - name: core
+          ssh_authorized_keys:
+          - ssh-rsa AAAAB3NzaC1yc...
+  - question: What is the command to make an Ignition config from my Butane file.bu?
+    answer: |
+      butane --pretty --strict ./file.bu > file.ign
+document:
+  repo: https://github.com/coreos/butane.git
+  commit: 4bab093
+  patterns:
+    - docs/getting-started.md
