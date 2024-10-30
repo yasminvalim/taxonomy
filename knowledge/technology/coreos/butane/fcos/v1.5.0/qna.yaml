@@ -1,0 +1,48 @@
+version: 2
+domain: technology
+created_by: coreos
+seed_examples:
+  - question: |
+      Is the field 'variant' required?
+    answer: |
+      Yes, the variant is required, and while targeting fcos, the correct value for that field is fcos.
+  - question: |
+      Is the field 'config' required?
+    answer: |
+      No, the field 'config' is not required because it’s italicized in the markdown spec.
+  - question: |
+      What is the 'config' field used for?
+    answer: |
+      It is used to supply options related to the configuration.
+  - question: |
+      How can I tell which fields are required?
+    answer: |
+      The Fedora CoreOS configuration is a YAML document conforming to the following specification, with
+      **_italicized_** entries being optional.
+  - question: |
+      Then that means that the 'merge' field is optional?
+    answer: |
+      Yes, that is correct; the 'merge' field is optional.
+  - question: |
+      What are all the required fields?
+    answer: |
+      The 'variant' and 'version' fields are required.
+  - question: |
+      What type does the 'variant' field take?
+    answer: |
+      The 'variant' field takes a string.
+  - question: |
+      What type does the 'config' field take?
+    answer: |
+      The 'config' field takes an object.
+  - question: |
+      What are the fields available inside of 'config'?
+    answer: |
+      The 'config' field has an optional field called 'merge,' which is a list of objects.
+task_description: |
+  Information about the FCOS spec file for Butane.
+document:
+  repo: https://github.com/coreos/butane.git
+  commit: 6d2ec2db702306cbbdb5d82b38bccdd6f62ec2a6
+  patterns:
+    - docs/config-fcos-v1_5.md
