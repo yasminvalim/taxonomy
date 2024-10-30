@@ -1,5 +1,0 @@
-Title of work: Fedora CoreOS v1.4.0
-Link to work: https://github.com/coreos/butane/blob/main/docs/config-fcos-v1_5.md
-Revision: NA
-License of the work: Apache License 2.0
-Creator names: CoreOS
